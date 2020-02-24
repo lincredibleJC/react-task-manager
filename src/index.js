@@ -4,6 +4,7 @@ import '../node_modules/reset-css/reset.css';
 import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from './Column';
+import TaskForm from './TaskForm';
 import TaskCounter from './TaskCounter';
 
 const TaskManagerApp = styled.div`
@@ -34,17 +35,11 @@ const TaskManagerBody = styled.div`
 	flex-direction: column;
 `;
 
-const TaskManagerLoader = styled.div`
+const TaskManagerLoader= styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-`;
-
-
-const TaskLoader = styled.div`
-	margin: 15px;
-
 `;
 
 const Container = styled.div`
@@ -86,40 +81,33 @@ class App extends React.Component {
 		};
 
 		this.state = initialData;
-		this.addItemToTodo = this.addItemToTodo.bind(this);
+		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.onDragEnd = this.onDragEnd.bind(this);
 	}
 
-	addItemToTodo(e){
-		if (this._inputElement.value !== ""){
-			var newIndex = Date.now().toString();
-			var newTask = {
-				id: newIndex,
-				content: this._inputElement.value,
-			};
+	onFormSubmit(e){
+		var newIndex = Date.now().toString();
+		var newTask = {
+			id: newIndex,
+			content: e,
+		};
 
-			const newColumn = this.state.columns['column-1'];
-			newColumn.taskIds = Array.from(newColumn.taskIds).concat(newIndex);
+		const newColumn = this.state.columns['column-1'];
+		newColumn.taskIds = Array.from(newColumn.taskIds).concat(newIndex);
 
-			const newState = {
-				...this.state,
-				tasks:{
-					...this.state.tasks,
-					[newIndex]:newTask,
-				},
-				columns:{
-					...this.state.columns,
-					[newColumn.id]: newColumn,
-				},
-			};
+		const newState = {
+			...this.state,
+			tasks:{
+				...this.state.tasks,
+				[newIndex]:newTask,
+			},
+			columns:{
+				...this.state.columns,
+				[newColumn.id]: newColumn,
+			},
+		};
 
-			this.setState(newState);
-
-			this._inputElement.value="";
-		}
-		console.log(this.state);
-
-		e.preventDefault();
+		this.setState(newState);		
 	}
 
 
@@ -188,22 +176,10 @@ class App extends React.Component {
 	render(){
 		return (
 			<TaskManagerApp>
-				<TaskManagerTitle>
-			      React Task Manager App
-			    </TaskManagerTitle>
+				<TaskManagerTitle>React Task Manager App</TaskManagerTitle>
 			    <TaskManagerBody>
 					<TaskManagerLoader>
-						<TaskLoader>
-							<form onSubmit={this.addItemToTodo}>
-			        			<label>
-			        				Add Project
-			        				<input ref={(a) => this._inputElement = a}
-			        					placeholder="Enter Item">
-			        				</input>
-			        			</label>
-			        			<button type="submit">add</button>
-			        		</form>
-		        		</TaskLoader>
+						<TaskForm onFormSubmit={this.onFormSubmit}></TaskForm>
 						<TaskCounter count={Object.values(this.state.tasks).length}></TaskCounter>
 					</TaskManagerLoader>
 					
