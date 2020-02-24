@@ -35,14 +35,14 @@ const TaskManagerBody = styled.div`
 	flex-direction: column;
 `;
 
-const TaskManagerLoader= styled.div`
+const LoaderAndCounter= styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 `;
 
-const Container = styled.div`
+const ColumnContainer = styled.div`
 	display: flex;
 	flex: 1;
 `;
@@ -178,20 +178,20 @@ class App extends React.Component {
 			<TaskManagerApp>
 				<TaskManagerTitle>React Task Manager App</TaskManagerTitle>
 			    <TaskManagerBody>
-					<TaskManagerLoader>
+					<LoaderAndCounter>
 						<TaskForm onFormSubmit={this.onFormSubmit}></TaskForm>
 						<TaskCounter count={Object.values(this.state.tasks).length}></TaskCounter>
-					</TaskManagerLoader>
+					</LoaderAndCounter>
 					
 					<DragDropContext onDragEnd={this.onDragEnd}>
-						<Container>
+						<ColumnContainer>
 						{this.state.columnOrder.map((columnId) => {
 							const column = this.state.columns[columnId];
 							const tasks = column.taskIds.map((taskId)=> this.state.tasks[taskId]);
 
 							return <Column key={column.id} column={column} tasks={tasks} />;
 						})}
-						</Container>
+						</ColumnContainer>
 					</DragDropContext>
 				</TaskManagerBody>
 			</TaskManagerApp>
