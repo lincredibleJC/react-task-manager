@@ -58,25 +58,58 @@ class App extends React.Component {
 			return;
 		}
 
-		const column = this.state.columns[source.droppableId];
-		const newTaskIds = Array.from(column.taskIds);
-		newTaskIds.splice(source.index, 1);
-		newTaskIds.splice(destination.index, 0, draggableId);
+		const sourceColumn = this.state.columns[source.droppableId];
+		const destinationColumn = this.state.columns[destination.droppableId];
 
-		const newColumn = {
-			...column,
-			taskIds: newTaskIds,
-		};
+		if (sourceColumn == destinationColumn){
+			const newTaskIds = Array.from(sourceColumn.taskIds);
+			newTaskIds.splice(source.index, 1);
+			newTaskIds.splice(destination.index, 0, draggableId);
 
-		const newState = {
-			...this.state,
-			columns:{
-				...this.state.columns,
-				[newColumn.id]: newColumn,
-			},
-		};
+			const newColumn = {
+				...sourceColumn,
+				taskIds: newTaskIds,
+			};
 
-		this.setState(newState);
+			const newState = {
+				...this.state,
+				columns:{
+					...this.state.columns,
+					[newColumn.id]: newColumn,
+				},
+			};
+
+			this.setState(newState);
+
+		} else {
+			const newSourceTaskIds = Array.from(sourceColumn.taskIds);
+			newSourceTaskIds.splice(source.index,1);
+			const newDestinationTaskIds = Array.from(destinationColumn.taskIds);
+			newDestinationTaskIds.splice(destination.index,0,draggableId);
+
+			const newSourceColumn = {
+				...sourceColumn,
+				taskIds: newSourceTaskIds,
+			};
+
+			const newDestinationColumn = {
+				...destinationColumn,
+				taskIds: newDestinationTaskIds,
+			};
+
+			const newState = {
+				...this.state,
+				columns:{
+					...this.state.columns,
+					[newSourceColumn.id]: newSourceColumn,
+					[newDestinationColumn.id]: newDestinationColumn,
+				},
+			};
+
+			this.setState(newState);
+			
+		}
+
 	}
 
 	render(){
