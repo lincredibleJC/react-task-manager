@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Droppable } from 'react-beautiful-dnd';
 import Task from './Task';
 
 const Container = styled.div`
@@ -17,17 +18,27 @@ const TaskList = styled.div`
 `;
 
 class Column extends React.Component {
+	//{innerRef}					//https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md
+	//{...provided.droppableProps}	//props to apply to component to make it droppable
+	//{provided.placeholder}			//increase available space in droppable during drag
 	render() {
 		return(
 			<Container>
 				<Title>{this.props.column.title}</Title>
-				<TaskList>
-					{this.props.tasks.map((task) => <Task key={task.id} task={task} />)}
-				</TaskList>
+				<Droppable droppableId={this.props.column.id}>
+					{(provided) =>(
+						<TaskList
+							ref={provided.innerRef}
+							innerRef={provided.innerRef}
+							{...provided.droppableProps}
+						>
+							{this.props.tasks.map((task,index) => <Task key={task.id} task={task} index={index} />)}
+							{provided.placeholder}
+						</TaskList>
+					)}
+				</Droppable>
 			</Container>
-		)
-
-		return this.props.column.title
+		);
 	}
 }
 
