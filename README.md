@@ -17,9 +17,11 @@ Features successfully built we're looking for:
 
 Things I would love to improve on if I had more time and a better understanding of how ReactJS works:
 
+* Having the input form focus onto itself after submitting
+* More responsive UI
 * Cleaner separation of components
-* better data structure for representing data
-* built in hosting and persistence of data (I do have some hardcoded sample data though)
+* Better data structure for representing data
+* Built in hosting and persistence of data (I do have some hardcoded sample data though)
 * Better looking CSS
 * Not relying on ReactJS video tutorials as heavily as I did
 
