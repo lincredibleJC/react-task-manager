@@ -1,5 +1,7 @@
 # React Task Manager
 
+![Screenshot of my task manager](/public/taskManagerPage.png?raw=true "taskManagerPage")
+
 This is an implementation of a Project Manager in ReactJS done according to the specs [here](https://gist.github.com/aravindet/ce19c019b774794c4e23df5760e8cca5 "Zendesk Front-end SWE coding challenge").
 I rarely program in javascript and have no prior experience in ReactJS prior to this, so do forgive my lack of code structure and overall polish in this repo.
 
