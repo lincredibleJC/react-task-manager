@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-@import '/path/to/reset-css/reset.css';
+import '../node_modules/reset-css/reset.css';
 import Column from './Column';
 
 class App extends React.Component {
