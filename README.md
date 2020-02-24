@@ -1,3 +1,33 @@
+# React Task Manager
+
+This is an implementation of a Project Manager in ReactJS done according to the specs [here](https://gist.github.com/aravindet/ce19c019b774794c4e23df5760e8cca5 "Zendesk Front-end SWE coding challenge").
+I rarely program in javascript and have no prior experience in ReactJS prior to this, so do forgive my lack of code structure and overall polish in this repo.
+
+
+Features successfully built we're looking for:
+
+* [x] Entering text in the 'add project' input and hitting enter will add it as an item to the 'todo' list.
+* [x] Three columns for 'Todo', 'In Progress', and 'Done' projects.
+* [x] Projects should be draggable and sortable within the same column.
+* [x] Projects can also be dragged between adjacent columns.
+* [x] The total at the top of each column reflects the number of projects.
+* [x] The global total reflects the the global sum of projects.
+
+Things I would love to improve on if I had more time and a better understanding of how ReactJS works:
+
+* Cleaner separation of components
+* better data structure for representing data
+* built in hosting and persistence of data (I do have some hardcoded sample data though)
+* Better looking CSS
+* Not relying on ReactJS video tutorials as heavily as I did
+
+Steps to getting this running:
+
+1. Run 'npm install' to download npm dependencies.
+1. Run 'npm start' to get run the app in development mode. 
+
+======
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
